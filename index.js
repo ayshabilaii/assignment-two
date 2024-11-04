@@ -1,38 +1,23 @@
-const http = require('http');
+const express = require('express')
+const app = express()
+const port = 3000
 
-const hostname = '127.0.0.1';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200; // success response codem
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, !\n');
-});
-
-server.listen(port, hostname, () => {
-  console.log('Server running at http://${hostname}:${port}/');
+/*
+function helloworld (req,res,next)
+{
+  res.setHeader('Content-type', 'text.plain');
+  res.end('Hello World')
+}
+app.use('/helloworld',helloworld)
+app.listen(3000)
+*/
+app.get('/helloworld', (req, res) => {
+  res.send('Hello world!')
+})
+app.get('/goodbyeworld', (req, res) => {
+  res.send('Good Bye world!')
 })
 
-// require module
-var connect = require('connect')
- 
-// create app
-var app = connect()
-
-//lecture two video
-function helloworld(req,res, next)
-{
-  res.setHeader('Content-Type','text/plain');
-  res.end("Hello World");
-}
-
-function GoodByeworld(req,res, next)
-{
-  res.setHeader('Content-Type','text/plain');
-  res.end("Goodbye World");
-}
-
-app.use('/Aboutme',Aboutme);
-app.use('/Contactus',Contactus);
-app.listen(3000);
-console.log('Sever is running on local host')
+app.listen(port, () => {
+  console.log('Example app listening on port ${port}')
+})
